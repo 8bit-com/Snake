@@ -24,11 +24,14 @@ namespace Snake
             for (int X = 0; X < arr[0].Length; X++)
             {
                 arr[0][X] = BORDER;
+
                 arr[arr.Length - 1][X] = BORDER;
             }
+
             for (int Y = 0; Y < arr.Length; Y++)
             {
                 arr[Y][0] = BORDER;
+
                 arr[Y][arr[0].Length - 1] = BORDER;
             }
         }

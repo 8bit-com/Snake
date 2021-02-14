@@ -1,39 +1,21 @@
 ﻿using static Snake.Const;
 using static System.Console;
+using static System.ConsoleColor;
 using System;
+
 namespace Snake
 {
     class Game
     {
-        void PrintPoint(Point point, int X, int Y)
+        void PrintPoint( Point point, int X, int Y )
         {
-            ConsoleColor color;
+            ConsoleColor[] colors = { Black, DarkGray, Green, DarkGreen, Red };
 
-            switch(point)
-            {
-                case Point.APPLE:
-                    color = ConsoleColor.Red;
-                    break;
-                case Point.BORDER:
-                    color = ConsoleColor.DarkGray;
-                    break;
-                case Point.HEAD:
-                    color = ConsoleColor.DarkGreen;
-                    break;
-                case Point.SNAKE:
-                    color = ConsoleColor.Green;
-                    break;
-                case Point.SPACE:
-                    color = ConsoleColor.Black;
-                    break;
-                default:
-                    color = ConsoleColor.Black;
-                    break;
-            }
+            BackgroundColor = colors[ (int)point ];
 
-            BackgroundColor = color;
+            SetCursorPosition( X, Y );
 
-            SetCursorPosition(X, Y);
+            Write(' ');
 
             Write(' ');
         }
