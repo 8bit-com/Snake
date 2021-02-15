@@ -1,6 +1,6 @@
 ﻿namespace Snake
 {
-    static class Snake
+    class Snake
     {
         
     }

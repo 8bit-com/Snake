@@ -1,21 +1,28 @@
-﻿using static Snake.Const;
+﻿using System;
+using System.Threading;
+using static Snake.Const;
 using static System.Console;
 using static System.ConsoleColor;
-using System;
 
 namespace Snake
 {
+    public delegate void UI();
+
     class Game
     {
-        void PrintPoint( Point point, int X, int Y )
+        Field field = new Field(HIGHT, WIDTH);
+
+        Snake snake = new Snake();
+
+        Timer timer = new Timer();
+
+        void PrintPoint( int i, int X, int Y )
         {
             ConsoleColor[] colors = { Black, DarkGray, Green, DarkGreen, Red };
 
-            BackgroundColor = colors[ (int)point ];
+            BackgroundColor = colors[i];
 
             SetCursorPosition( X, Y );
-
-            Write(' ');
 
             Write(' ');
         }
@@ -25,14 +32,21 @@ namespace Snake
             {
                 for (int X = 0; X < arr[0].Length; X++)
                 {
-                    PrintPoint(arr[Y][X], X, Y);
+                    PrintPoint((int)arr[Y][X], X, Y);
                 }
             }
         }
         public void Start()
         {
-            Field field = new Field(HIGHT, WIDTH);
+            timer.Interval = 200;
 
+            timer.Tick += Timer_Tick;
+
+            timer.Start();
+        }
+
+        private void Timer_Tick()
+        {
             PrintField(field.arr);
         }
     }
