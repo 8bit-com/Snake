@@ -16,9 +16,7 @@ namespace Snake
                 arr[Y] = new Point[width];
 
                 for (int X = 0; X < arr[Y].Length; X++)
-                {
                     arr[Y][X] = SPACE;
-                }
             }
 
             for (int X = 0; X < arr[0].Length; X++)
