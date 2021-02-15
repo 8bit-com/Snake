@@ -6,38 +6,35 @@ using static System.ConsoleColor;
 
 namespace Snake
 {
-    public delegate void UI();
-
     class Game
     {
-        Field field = new Field(HIGHT, WIDTH);
+        Timer timer = new Timer();
 
         Snake snake = new Snake();
 
-        Timer timer = new Timer();
+        Apple apple = new Apple();
 
-        void PrintPoint( int i, int X, int Y )
+        void PrintPoint( ConsoleColor color, int X, int Y )
         {
-            ConsoleColor[] colors = { Black, DarkGray, Green, DarkGreen, Red };
-
-            BackgroundColor = colors[i];
+            BackgroundColor = color;
 
             SetCursorPosition( X, Y );
 
             Write(' ');
         }
-        void PrintField(Point[][] arr)
+
+        void Print()
         {
-            for (int Y = 0; Y < arr.Length; Y++)
-            {
-                for (int X = 0; X < arr[0].Length; X++)
-                {
-                    PrintPoint((int)arr[Y][X], X, Y);
-                }
-            }
+            CursorVisible = false;
+
+            foreach (var item in snake.arr)            
+                PrintPoint(snake.color, item.X, item.Y);
+
+            PrintPoint(apple.color, apple.cord.X, apple.cord.Y);
         }
         public void Start()
         {
+
             timer.Interval = 200;
 
             timer.Tick += Timer_Tick;
@@ -47,7 +44,9 @@ namespace Snake
 
         private void Timer_Tick()
         {
-            PrintField(field.arr);
+            Print();
+
+            snake.arr[0].X++;
         }
     }
 }

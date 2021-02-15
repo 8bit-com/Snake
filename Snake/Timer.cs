@@ -2,6 +2,7 @@
 
 namespace Snake
 {
+    public delegate void UI();
     class Timer
     {
         public event UI Tick;
