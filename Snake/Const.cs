@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 
 namespace Snake
 {
@@ -7,6 +7,7 @@ namespace Snake
         public const int HIGHT = 25;
 
         public const int WIDTH = 50;
-        public enum Point { SPACE, BORDER, SNAKE, HEAD, APPLE };
+
+        public static Random random = new Random();
     }
 }

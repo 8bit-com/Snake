@@ -1,53 +1,71 @@
-﻿using System;
-using System.Threading;
-using static Snake.Const;
+﻿using static Snake.Const;
 using static System.Console;
 using static System.ConsoleColor;
 
 namespace Snake
 {
-    public delegate void UI();
-
     class Game
     {
-        Field field = new Field(HIGHT, WIDTH);
-
-        Snake snake = new Snake();
-
         Timer timer = new Timer();
+        Snake snake = new Snake();
+        Apple apple = new Apple();
 
-        void PrintPoint( int i, int X, int Y )
+        void PrintField()
         {
-            ConsoleColor[] colors = { Black, DarkGray, Green, DarkGreen, Red };
+            BackgroundColor = Blue;
 
-            BackgroundColor = colors[i];
-
-            SetCursorPosition( X, Y );
-
-            Write(' ');
-        }
-        void PrintField(Point[][] arr)
-        {
-            for (int Y = 0; Y < arr.Length; Y++)
+            for (int i = 0;  i < WIDTH; i++)
             {
-                for (int X = 0; X < arr[0].Length; X++)
+                PrintPoint(i, 0);
+                PrintPoint(i, HIGHT - 1);
+
+                if (i < HIGHT)
                 {
-                    PrintPoint((int)arr[Y][X], X, Y);
-                }
+                    PrintPoint(0, i);
+                    PrintPoint(WIDTH - 1, i);
+                }   
             }
         }
+        void PrintPoint(int X, int Y )
+        {
+            SetCursorPosition( X, Y );
+            Write(' ');
+        }
+        void Print(bool visible)
+        {
+            CursorVisible = false;
+            PrintObj(snake, visible);
+            PrintObj(apple, visible);
+        }
+        void PrintObj<T>(T obj, bool visible) where T : GameObj
+        {
+            BackgroundColor = visible ? obj.color : Black;
+
+            foreach (var item in obj.arr) 
+                PrintPoint(item.X, item.Y);
+        }
+
         public void Start()
         {
+            PrintField();
+
             timer.Interval = 200;
-
             timer.Tick += Timer_Tick;
-
             timer.Start();
         }
 
         private void Timer_Tick()
         {
-            PrintField(field.arr);
+            Print(false);
+
+            Control();
+
+            Print(true);
+        }
+
+        private void Control()
+        {
+            snake.MoveDown();
         }
     }
 }
