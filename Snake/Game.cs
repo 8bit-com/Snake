@@ -44,7 +44,6 @@ namespace Snake
             foreach (var item in obj.arr) 
                 PrintPoint(item.X, item.Y);
         }
-
         public void Start()
         {
             PrintField();
@@ -53,17 +52,15 @@ namespace Snake
             timer.Tick += Timer_Tick;
             timer.Start();
         }
-
         private void Timer_Tick()
         {
             Print(false);
 
-            Control();
+            GameControl();
 
             Print(true);
         }
-
-        private void Control()
+        private void GameControl()
         {
             snake.MoveDown();
         }

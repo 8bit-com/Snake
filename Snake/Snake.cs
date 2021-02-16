@@ -1,4 +1,4 @@
-﻿using System;
+﻿using static System.ConsoleColor;
 
 namespace Snake
 {
@@ -6,8 +6,7 @@ namespace Snake
     {
         public Snake()
         {
-            arr[0].X = 5;
-            arr[0].Y = 5;
+            color = Green;
         }
         public void MoveRight() => arr[0].X++;
         public void MoveLeft()  => arr[0].X--;

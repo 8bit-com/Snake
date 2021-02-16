@@ -1,4 +1,4 @@
-﻿using System.Threading;
+﻿using static System.Threading.Thread;
 
 namespace Snake
 {
@@ -13,7 +13,7 @@ namespace Snake
             {
                 Tick();
 
-                Thread.Sleep(Interval);
+                Sleep(Interval);
 
             } while (true);
         }

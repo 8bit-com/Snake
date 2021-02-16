@@ -8,6 +8,6 @@ namespace Snake
 
         public const int WIDTH = 50;
 
-        public static Random random = new Random();
+        public static Random rand = new Random();
     }
 }
