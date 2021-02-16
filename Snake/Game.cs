@@ -1,5 +1,4 @@
-﻿using System;
-using static Snake.Const;
+﻿using static Snake.Const;
 using static System.Console;
 using static System.ConsoleColor;
 
@@ -59,9 +58,14 @@ namespace Snake
         {
             Print(false);
 
-            
+            Control();
 
             Print(true);
+        }
+
+        private void Control()
+        {
+            snake.MoveDown();
         }
     }
 }
