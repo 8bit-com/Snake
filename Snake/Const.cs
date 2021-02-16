@@ -9,8 +9,5 @@ namespace Snake
         public const int WIDTH = 50;
 
         public static Random random = new Random();
-
-        public enum Point { SPACE, BORDER, SNAKE, APPLE };
-
     }
 }
