@@ -13,37 +13,37 @@ namespace Snake
 
         void PrintField()
         {
+            BackgroundColor = Blue;
+
             for (int i = 0;  i < WIDTH; i++)
             {
-                PrintPoint(Blue, i, 0);
-                PrintPoint(Blue, i, HIGHT - 1);
+                PrintPoint(i, 0);
+                PrintPoint(i, HIGHT - 1);
 
                 if (i < HIGHT)
                 {
-                    PrintPoint(Blue, 0, i);
-                    PrintPoint(Blue, WIDTH - 1, i);
+                    PrintPoint(0, i);
+                    PrintPoint(WIDTH - 1, i);
                 }   
             }
         }
-        void PrintPoint( ConsoleColor color, int X, int Y )
+        void PrintPoint(int X, int Y )
         {
-            BackgroundColor = color;
             SetCursorPosition( X, Y );
             Write(' ');
         }
-
         void Print(bool visible)
         {
             CursorVisible = false;
-
             PrintObj(snake, visible);
             PrintObj(apple, visible);
         }
-
         void PrintObj<T>(T obj, bool visible) where T : GameObj
         {
+            BackgroundColor = visible ? obj.color : Black;
+
             foreach (var item in obj.arr) 
-                PrintPoint(visible? obj.color : Black, item.X, item.Y);
+                PrintPoint(item.X, item.Y);
         }
 
         public void Start()
@@ -59,7 +59,7 @@ namespace Snake
         {
             Print(false);
 
-            snake.arr[0].X++;
+            
 
             Print(true);
         }
