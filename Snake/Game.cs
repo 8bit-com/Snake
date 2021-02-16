@@ -1,14 +1,18 @@
-﻿using static Snake.Const;
+﻿using System;
+using static Snake.Const;
 using static System.Console;
 using static System.ConsoleColor;
+using static System.ConsoleKey;
 
 namespace Snake
 {
+    public delegate void Contr();
     class Game
     {
         Timer timer = new Timer();
-        Snake snake = new Snake();
+        static Snake snake = new Snake();
         Apple apple = new Apple();
+        Contr contr = new Contr(snake.MoveRight);
 
         void PrintField()
         {
@@ -58,11 +62,26 @@ namespace Snake
 
             GameControl();
 
+            contr();
+
             Print(true);
         }
         private void GameControl()
         {
-            snake.MoveDown();
+            if (KeyAvailable)
+            {
+                key = ReadKey(true).Key;
+
+                Contr[] contrs =
+                {
+                    snake.MoveLeft,
+                    snake.MoveUp,
+                    snake.MoveRight,
+                    snake.MoveDown
+                };
+
+                contr = contrs[(int)key - 37];
+            }
         }
     }
 }
