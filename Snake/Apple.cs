@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿using static System.ConsoleColor;
 
 namespace Snake
 {
@@ -7,7 +6,7 @@ namespace Snake
     {
         public Apple()
         {
-            color = ConsoleColor.Yellow;
+            color = Yellow;
         }
     }
 }
