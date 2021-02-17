@@ -1,11 +1,13 @@
-﻿using System.Threading;
+﻿using static System.Threading.Thread;
+using static Snake.Const;
+using System;
 
 namespace Snake
 {
-    public delegate void UI();
+    public delegate void Time();
     class Timer
     {
-        public event UI Tick;
+        public event Time Tick;
         public int Interval { get; set; }
         public void Start()
         {
@@ -13,9 +15,9 @@ namespace Snake
             {
                 Tick();
 
-                Thread.Sleep(Interval);
+                Sleep(Interval);
 
-            } while (true);
+            } while (key != (int)ConsoleKey.Escape);
         }
     }
 }
