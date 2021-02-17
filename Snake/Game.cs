@@ -8,6 +8,7 @@ namespace Snake
         Timer timer = new Timer();
         Snake snake = new Snake();
         Apple apple = new Apple();
+
         void Print(bool visible)
         {
             CursorVisible = false;
@@ -23,6 +24,7 @@ namespace Snake
             timer.Tick += Timer_Tick;
             timer.Start();
         }
+
         private void Timer_Tick()
         {
             Print(false);
@@ -30,8 +32,26 @@ namespace Snake
             snake.Control();
 
             snake.contr();
+            snake.Step();
 
+            Colision();
+            
             Print(true);
+        }
+
+        void Colision()
+        {
+            int snakeX = snake.arr[0].X;
+            int snakeY = snake.arr[0].Y;
+            int appleX = apple.arr[0].X;
+            int appleY = apple.arr[0].Y;
+
+            if (snakeX == appleX & snakeY == appleY)
+            {
+                apple.Replace();
+                snake.ReSize();
+                snake.Step();
+            }
         }
     }
 }

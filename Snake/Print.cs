@@ -10,6 +10,7 @@ namespace Snake
         {
             SetCursorPosition(X, Y);
             Write(' ');
+            Write(' ');
         }
 
         public static void PrintField()

@@ -7,9 +7,8 @@ namespace Snake
     class Snake: GameObj
     {
         public delegate void Contr();
-
-        Contr[] contrs;
         public Contr contr;
+        Contr[] contrs;        
 
         public Snake()
         {
@@ -23,10 +22,17 @@ namespace Snake
                 MoveDown
             };
         }
-        public void MoveRight() => arr[0].X++;
-        public void MoveLeft()  => arr[0].X--;
+        public void MoveRight() => arr[0].X+=2;
+        public void MoveLeft()  => arr[0].X-=2;
         public void MoveDown()  => arr[0].Y++;
         public void MoveUp()    => arr[0].Y--;
+        public void Step()
+        {
+            for (int i = arr.Length - 1; i >= 0; i--)
+            {
+                if (i > 0) arr[i] = arr[i - 1];
+            }
+        }
         public void Control()
         {
             if (KeyAvailable)
@@ -38,6 +44,14 @@ namespace Snake
 
                 contr = (key > 36 && key < 41) ? contrs[key - 37] : contr;
             }
+        }
+        public void ReSize()
+        {
+            Cord[] newArr = new Cord[arr.Length + 1];
+
+            arr.CopyTo(newArr, 0); 
+
+            arr = newArr;
         }
     }
 }
