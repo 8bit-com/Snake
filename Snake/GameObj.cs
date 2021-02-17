@@ -20,8 +20,8 @@ namespace Snake
         }
         public void Replace()
         {
-            arr[0].X = rand.Next(2, WIDTH);
-            arr[0].Y = rand.Next(2, HIGHT);
+            arr[0].X = rand.Next(2, WIDTH - 2);
+            arr[0].Y = rand.Next(2, HIGHT - 2);
         }
     }
 }
