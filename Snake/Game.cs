@@ -1,18 +1,17 @@
-﻿using System;
-using static Snake.Const;
+﻿using static Snake.Const;
 using static System.Console;
 using static System.ConsoleColor;
-using static System.ConsoleKey;
 
 namespace Snake
 {
-    public delegate void Contr();
     class Game
     {
+        delegate void Contr();
         Timer timer = new Timer();
-        static Snake snake = new Snake();
+        Snake snake = new Snake();
         Apple apple = new Apple();
-        Contr contr = new Contr(snake.MoveRight);
+        Contr[] contrs;
+        Contr contr;
 
         void PrintField()
         {
@@ -50,11 +49,24 @@ namespace Snake
         }
         public void Start()
         {
+            Init();
+
             PrintField();
 
             timer.Interval = 200;
             timer.Tick += Timer_Tick;
             timer.Start();
+        }
+        void Init()
+        {
+            contr  = new Contr(snake.MoveRight);
+            contrs = new Contr[]
+            { 
+                snake.MoveLeft,
+                snake.MoveUp,
+                snake.MoveRight,
+                snake.MoveDown
+            };
         }
         private void Timer_Tick()
         {
@@ -70,17 +82,12 @@ namespace Snake
         {
             if (KeyAvailable)
             {
-                key = ReadKey(true).Key;
-
-                Contr[] contrs =
+                do
                 {
-                    snake.MoveLeft,
-                    snake.MoveUp,
-                    snake.MoveRight,
-                    snake.MoveDown
-                };
+                    key = (int)ReadKey(true).Key;
+                } while (KeyAvailable);
 
-                contr = contrs[(int)key - 37];
+                contr = (key > 36 && key < 41) ? contrs[key-37] : contr;
             }
         }
     }

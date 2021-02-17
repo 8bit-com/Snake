@@ -17,7 +17,7 @@ namespace Snake
 
                 Sleep(Interval);
 
-            } while (key != ConsoleKey.Escape);
+            } while (key != (int)ConsoleKey.Escape);
         }
     }
 }
