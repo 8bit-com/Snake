@@ -22,10 +22,20 @@ namespace Snake
                 MoveDown
             };
         }
-        public void MoveRight() => arr[0].X+=2;
-        public void MoveLeft()  => arr[0].X-=2;
-        public void MoveDown()  => arr[0].Y++;
-        public void MoveUp()    => arr[0].Y--;
+        public void MoveRight() => Move(ref arr[0].X, true,  true );
+        public void MoveLeft()  => Move(ref arr[0].X, true,  false);
+        public void MoveDown()  => Move(ref arr[0].Y, false, true );
+        public void MoveUp()    => Move(ref arr[0].Y, false, false);      
+        void Move(ref int cord, bool dirXY, bool dirPM)
+        {
+            int limit = dirXY ? WIDTH - 2 : HIGHT - 1;
+            int step  = dirXY ? 2 : 1;
+            int istep = dirPM ? cord + step : cord - step;
+            int bordr = dirPM ? step : limit;
+            bool cond = dirPM ? (cord < limit) : (cord > step);
+
+            cord = cond ? istep : bordr;
+        }
         public void Step()
         {
             for (int i = arr.Length - 1; i >= 0; i--)

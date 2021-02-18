@@ -1,5 +1,6 @@
 ﻿using static Snake.Print;
 using static System.Console;
+using static System.ConsoleColor;
 
 namespace Snake
 {
@@ -14,6 +15,11 @@ namespace Snake
             CursorVisible = false;
             PrintObj(snake, visible);
             PrintObj(apple, visible);
+            BackgroundColor = Black;
+            SetCursorPosition(60, 5);
+            Write("Snake X = " + snake.arr[0].X);
+            SetCursorPosition(60, 6);
+            Write("Apple X = " + apple.arr[0].X);
         }
         
         public void Start()
